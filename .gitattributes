@@ -1,0 +1,16 @@
+# Normalise line endings so the repository behaves the same on Windows and Linux.
+* text=auto eol=lf
+
+# Binary assets — never converted or diffed as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.mp4 binary
+*.webm binary
+*.pdf binary
+*.ico binary
+
+# Generated / vendored content
+package-lock.json linguist-generated=true
+src/app/opengraph-image.tsx linguist-documentation=false
