@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/plus-jakarta-sans";
 import "./globals.css";
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="antialiased">
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
