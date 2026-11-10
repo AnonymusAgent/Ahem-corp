@@ -31,12 +31,12 @@ function htmlBody(subject: string, text: string): string {
     .split(/\n{2,}/)
     .map((p) => `<p style="margin:0 0 16px;line-height:1.6">${p.replace(/\n/g, "<br>")}</p>`)
     .join("");
-  return `<!doctype html><html><body style="margin:0;background:#F3F5F7;font-family:Arial,Helvetica,sans-serif;color:#252B32">
+  return `<!doctype html><html><body style="margin:0;background:#F7F7F4;font-family:Arial,Helvetica,sans-serif;color:#15191D">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:32px 16px">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:12px;overflow:hidden">
-<tr><td style="background:#10243A;padding:24px 32px;color:#ffffff;font-size:18px;font-weight:bold;letter-spacing:2px">AHEM <span style="color:#D6A84B">CORPORATION</span></td></tr>
-<tr><td style="padding:32px"><h1 style="margin:0 0 20px;font-size:20px;color:#10243A">${esc(subject)}</h1>${paragraphs}</td></tr>
-<tr><td style="padding:20px 32px;background:#F3F5F7;font-size:12px;color:#6b7280">This is an automated message from the Ahem Corporation website · ${esc(SITE_URL)}</td></tr>
+<tr><td style="background:#142B40;padding:24px 32px;color:#ffffff;font-size:18px;font-weight:bold;letter-spacing:2px">AHEM <span style="color:#E89A38">CORPORATION</span></td></tr>
+<tr><td style="padding:32px"><h1 style="margin:0 0 20px;font-size:20px;color:#142B40">${esc(subject)}</h1>${paragraphs}</td></tr>
+<tr><td style="padding:20px 32px;background:#F7F7F4;font-size:12px;color:#6b7280">This is an automated message from the Ahem Corporation website · ${esc(SITE_URL)}</td></tr>
 </table></td></tr></table></body></html>`;
 }
 

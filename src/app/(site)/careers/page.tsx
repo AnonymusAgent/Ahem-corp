@@ -44,7 +44,7 @@ export default async function CareersPage() {
               return (
                 <li key={j.id}>
                   <Reveal delay={i * 0.05}>
-                    <Link href={`/careers/${j.slug}`} className="group flex flex-col gap-4 rounded-2xl border border-line bg-white p-6 transition hover:border-navy/40 hover:shadow-[0_24px_50px_-30px_rgba(16,36,58,0.4)] sm:flex-row sm:items-center sm:justify-between sm:p-7">
+                    <Link href={`/careers/${j.slug}`} className="group flex flex-col gap-4 rounded-2xl border border-line bg-white p-6 transition hover:border-navy/40 hover:shadow-[0_24px_50px_-30px_rgba(20,43,64,0.4)] sm:flex-row sm:items-center sm:justify-between sm:p-7">
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
                           <h3 className="font-display text-lg font-semibold text-navy">{j.title}</h3>

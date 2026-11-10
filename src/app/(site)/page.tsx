@@ -3,8 +3,9 @@ import {
   ArrowRight, BadgeCheck, Building, CalendarClock, Check, Download, Droplets, Factory, FileCheck2, GraduationCap,
   HardHat, House, Landmark, Lock, Quote, Route, ShieldCheck, Users, Wallet, Zap,
 } from "lucide-react";
-import { BuildStack } from "@/components/BuildStack";
-import { ProjectCard, ServiceCard, TenderRow } from "@/components/cards";
+import { FeaturedWork } from "@/components/FeaturedWork";
+import { ProcessSection } from "@/components/ProcessTimeline";
+import { ServiceCard, TenderRow } from "@/components/cards";
 import Hero3D, { BlueprintSketch } from "@/components/Hero3D";
 import { LogoMark } from "@/components/Logo";
 import { Counter, Parallax, Reveal, Tilt } from "@/components/Motion";
@@ -42,9 +43,6 @@ export default async function HomePage() {
   const h = s.home;
   const [line1, ...rest] = h.heroHeadline.split(/(?<=\.)\s+/);
   const stats = parseRows(h.stats, 3).filter((r) => Number.isFinite(Number(r[0])));
-  // Featured first, topped up with other projects; 3 or 6 cards keep the mosaic complete (1 large + 2, then a row of 3).
-  const ordered = [...projects.filter((p) => p.featured), ...projects.filter((p) => !p.featured)];
-  const featured = ordered.slice(0, ordered.length >= 6 ? 6 : 3);
   const live = tenders
     .filter((t) => ["open", "closing_soon"].includes(tenderStatus(t)))
     .sort((a, b) => (a.deadline || "9").localeCompare(b.deadline || "9"))
@@ -53,12 +51,13 @@ export default async function HomePage() {
   return (
     <>
       {/* ------------------------------- Hero ------------------------------- */}
-      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-navy-900 pb-28 pt-28 text-white">
+      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-charcoal pb-28 pt-28 text-white">
         <Parallax mode="hero" amount={20} className="absolute inset-0 -z-30">
           <Img src={h.heroImage} alt="" w={1920} h={1200} priority className="h-full w-full object-cover" />
         </Parallax>
-        <div className="absolute inset-0 -z-20 bg-gradient-to-r from-navy-950 via-navy-900/85 to-navy-900/45" />
-        <div className="absolute inset-0 -z-20 bg-gradient-to-t from-navy-900 via-transparent to-navy-950/60" />
+        {/* Cinematic dark gradient: charcoal scrim left for legibility, vignette top/bottom */}
+        <div className="absolute inset-0 -z-20 bg-gradient-to-r from-charcoal via-charcoal/85 to-navy-900/40" />
+        <div className="absolute inset-0 -z-20 bg-gradient-to-t from-charcoal via-transparent to-charcoal/70" />
         <div className="absolute inset-0 -z-10 bg-blueprint" />
 
         <div className="wrap grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
@@ -67,7 +66,7 @@ export default async function HomePage() {
               <LogoMark size={52} />
               <p className="eyebrow text-gold">{h.heroEyebrow}</p>
             </div>
-            <h1 className="rise mt-7 font-display text-[2.6rem] font-semibold leading-[1.02] sm:text-6xl xl:text-[4.25rem]" style={{ animationDelay: "120ms" }}>
+            <h1 className="rise mt-7 font-display text-[2.75rem] font-semibold leading-[1.01] tracking-[-0.03em] sm:text-6xl xl:text-[4.75rem]" style={{ animationDelay: "120ms" }}>
               {line1}
               {rest.length > 0 && <span className="block text-gold">{rest.join(" ")}</span>}
             </h1>
@@ -78,7 +77,7 @@ export default async function HomePage() {
               <Link href="/projects" className="btn-gold">
                 Explore Our Projects <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
-              <Link href="/inquiry" className="btn-ghost">Submit Your Tender / Project Inquiry</Link>
+              <Link href="/inquiry?type=project-requirement" className="btn-ghost">Discuss Your Project</Link>
             </div>
             <ul className="rise mt-9 flex flex-wrap gap-x-7 gap-y-3 text-sm text-white/70" style={{ animationDelay: "480ms" }}>
               {["Government & public works", "Private & commercial projects", "Design–build & project management"].map((x) => (
@@ -121,6 +120,14 @@ export default async function HomePage() {
                 </li>
               ))}
             </ul>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {([["Mission", s.about.mission], ["Vision", s.about.vision]] as const).map(([label, text]) => (
+                <div key={label} className="rounded-2xl border border-line bg-mist p-5">
+                  <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-gold-700">{label}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-charcoal/80">{text}</p>
+                </div>
+              ))}
+            </div>
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Link href="/about" className="btn-navy">About Ahem Corporation</Link>
               <a href="/api/corporate-profile" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-navy">
@@ -175,41 +182,24 @@ export default async function HomePage() {
       )}
 
       {/* ------------------------- Featured projects ------------------------- */}
-      {h.showProjects && featured.length > 0 && (
+      {h.showProjects && projects.length > 0 && (
         <section className="section bg-white">
           <div className="wrap">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <Reveal>
-                <SectionHead eyebrow="Featured projects" title="Infrastructure and buildings, delivered." intro="A selection of completed, ongoing and upcoming work across public and private sectors." />
+                <SectionHead eyebrow="Featured projects" title="Infrastructure and buildings, delivered." intro="A selection of completed, ongoing and upcoming work across public and private sectors — filter by category." />
               </Reveal>
               <ArrowLink href="/projects">Explore the full portfolio</ArrowLink>
             </div>
-            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {featured.map((p, i) => (
-                <Reveal key={p.id} delay={(i % 3) * 0.08} className={i === 0 ? "sm:col-span-2 lg:row-span-2" : ""}>
-                  <ProjectCard p={p} tall={i === 0} />
-                </Reveal>
-              ))}
-            </div>
+            <FeaturedWork projects={projects} />
           </div>
         </section>
       )}
 
-      {/* ----------------------- Interactive delivery ------------------------ */}
+      {/* --------------------------- Our process (7 steps) ------------------- */}
       {h.showDelivery && (
-        <section className="section relative isolate overflow-hidden bg-navy-900 text-white">
-          <div className="absolute inset-0 -z-10 bg-blueprint" />
-          <div className="wrap">
-            <Reveal>
-              <SectionHead light eyebrow="How we deliver" title="Every project is built in layers — and managed as one." intro="Select a stage to see how responsibility carries through from the tender to the handover dossier." />
-            </Reveal>
-            <Reveal delay={0.1} className="mt-12">
-              <BuildStack />
-            </Reveal>
-            <div className="mt-10 text-center">
-              <ArrowLink href="/process" light>See our full delivery process</ArrowLink>
-            </div>
-          </div>
+        <section className="section bg-mist bg-blueprint-light">
+          <ProcessSection />
         </section>
       )}
 

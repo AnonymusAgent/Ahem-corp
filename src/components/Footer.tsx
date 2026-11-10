@@ -19,7 +19,7 @@ export function Footer({ settings: s, services }: { settings: SiteSettings; serv
   const a = "text-sm text-white/70 transition hover:text-gold";
 
   return (
-    <footer className="relative isolate overflow-hidden bg-navy-950 text-white">
+    <footer className="relative isolate overflow-hidden bg-charcoal text-white">
       <div className="absolute inset-0 -z-10 bg-blueprint opacity-60" />
       <div className="wrap grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-4">

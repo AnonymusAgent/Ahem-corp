@@ -1,25 +1,31 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────────────────
+   Ahem Corporation design system — premium palette
+   charcoal #15191D · navy #142B40 · warm white #F7F7F4
+   concrete grey #A5A9AC · construction orange #E89A38 (CTAs & highlights only)
+   ───────────────────────────────────────────────────────────────────────── */
 @theme {
-  --color-navy: #10243a;
-  --color-navy-950: #071320;
-  --color-navy-900: #0b1a2b;
-  --color-navy-800: #10243a;
-  --color-navy-700: #173452;
-  --color-navy-600: #21476d;
-  --color-navy-300: #8fa6bd;
+  --color-navy: #142b40; /* corporate navy — headers, nav, dark surfaces */
+  --color-navy-950: #0f2030; /* deep gradient base / image overlays */
+  --color-navy-900: #122839; /* section backgrounds */
+  --color-navy-800: #142b40;
+  --color-navy-700: #1d3d59; /* hover state */
+  --color-navy-600: #2a5479;
+  --color-navy-300: #8fa7bf;
   --color-navy-200: #b9c8d7;
-  --color-gold: #d6a84b;
-  --color-gold-300: #e6c887;
-  --color-gold-100: #f7ecd3;
-  --color-gold-600: #b3862c;
-  --color-gold-700: #7d5c14;
-  --color-charcoal: #252b32;
-  --color-mist: #f3f5f7;
-  --color-line: #e2e6ea;
+  --color-gold: #e89a38; /* construction orange — CTAs & highlights */
+  --color-gold-300: #f1b469;
+  --color-gold-100: #fbeedc;
+  --color-gold-600: #c57a1f;
+  --color-gold-700: #9c5b14; /* accessible orange text on light surfaces */
+  --color-charcoal: #15191d; /* deep charcoal — body text & dark surfaces */
+  --color-mist: #f7f7f4; /* warm white — alternating section background */
+  --color-line: #e4e2db; /* warm divider */
+  --color-concrete: #a5a9ac; /* concrete grey — secondary details */
 
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Plus Jakarta Sans Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -40,7 +46,7 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     text-wrap: balance;
   }
   p {
@@ -77,10 +83,10 @@
     @apply block h-px w-8 bg-current opacity-70;
   }
   .display {
-    @apply font-display text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-6xl;
+    @apply font-display text-4xl font-semibold leading-[1.03] sm:text-5xl lg:text-6xl xl:text-[4.5rem];
   }
   .h2 {
-    @apply font-display text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text-[2.75rem];
+    @apply font-display text-[1.9rem] font-semibold leading-[1.08] sm:text-4xl lg:text-[2.9rem];
   }
   .lead {
     @apply text-base leading-relaxed text-charcoal/75 sm:text-lg;
@@ -90,19 +96,19 @@
   .btn-navy,
   .btn-ghost,
   .btn-outline {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-300 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-semibold tracking-[0.01em] transition duration-300 disabled:cursor-not-allowed disabled:opacity-60;
   }
   .btn-gold {
-    @apply bg-gold text-navy-900 shadow-[0_10px_30px_-12px_rgba(214,168,75,0.8)] hover:-translate-y-0.5 hover:bg-gold-300;
+    @apply bg-gold text-charcoal shadow-[0_12px_34px_-14px_rgba(232,154,56,0.85)] hover:-translate-y-0.5 hover:bg-gold-300 hover:shadow-[0_16px_40px_-14px_rgba(232,154,56,0.95)];
   }
   .btn-navy {
     @apply bg-navy text-white hover:-translate-y-0.5 hover:bg-navy-700;
   }
   .btn-ghost {
-    @apply border border-white/30 text-white backdrop-blur hover:border-gold hover:text-gold;
+    @apply border border-white/35 text-white backdrop-blur hover:border-gold hover:bg-white/5 hover:text-gold;
   }
   .btn-outline {
-    @apply border border-navy/20 text-navy hover:border-navy hover:bg-navy hover:text-white;
+    @apply border border-navy/25 text-navy hover:border-navy hover:bg-navy hover:text-white;
   }
   .card {
     @apply rounded-2xl border border-line bg-white;
@@ -162,8 +168,8 @@
 }
 .bg-blueprint-light {
   background-image:
-    linear-gradient(rgba(16, 36, 58, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 36, 58, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(20, 43, 64, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 43, 64, 0.05) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 

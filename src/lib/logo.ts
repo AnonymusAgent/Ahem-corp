@@ -17,9 +17,9 @@ export const LOGO = {
 };
 
 export const BRAND = {
-  navy: "#10243A",
-  gold: "#D6A84B",
-  charcoal: "#252B32",
+  navy: "#142B40",
+  gold: "#E89A38",
+  charcoal: "#15191D",
   white: "#FFFFFF",
-  grey: "#F3F5F7",
+  grey: "#F7F7F4",
 };
