@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/plus-jakarta-sans";
 import "./globals.css";
@@ -20,7 +21,10 @@ export const viewport: Viewport = { themeColor: "#10243A", width: "device-width"
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
