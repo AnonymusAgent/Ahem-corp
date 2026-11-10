@@ -10,6 +10,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const fixed: [string, number][] = [
     ["", 1], ["/about", 0.8], ["/services", 0.9], ["/projects", 0.9], ["/tenders", 0.9], ["/inquiry", 0.8],
     ["/clients", 0.6], ["/certifications", 0.7], ["/careers", 0.6], ["/news", 0.6], ["/contact", 0.8],
+    ["/process", 0.7], ["/sustainability", 0.6], ["/suppliers", 0.6], ["/faq", 0.6], ["/downloads", 0.5],
+    ["/sitemap", 0.3], ["/brand", 0.3],
   ];
   return [
     ...fixed.map(([path, priority]) => ({ url: `${SITE_URL}${path}`, lastModified: now, changeFrequency: "weekly" as const, priority })),

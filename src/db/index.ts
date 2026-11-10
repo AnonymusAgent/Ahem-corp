@@ -3,10 +3,11 @@ import { Pool } from "pg";
 
 const databaseUrl = process.env.DATABASE_URL;
 
-if (!databaseUrl) {
-  throw new Error("DATABASE_URL is required");
-}
-
+// The pool is created without throwing at import time so that `next build`
+// and the public marketing pages can load even when DATABASE_URL is missing
+// or the database is briefly unavailable. Public read models in
+// `src/lib/data.ts` degrade to empty results in that case; admin routes
+// still require a working database and will surface the connection error.
 const globalForDb = globalThis as typeof globalThis & {
   __arenaNextJsPostgresqlPool?: Pool;
 };

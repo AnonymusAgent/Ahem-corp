@@ -2,7 +2,7 @@
 
 Full-stack corporate website, tender/procurement portal, lead-management (CRM) system and admin dashboard.
 
-- **Public site:** Home, About, Services (+14 detail pages), Projects (+detail), Tenders (+detail), Inquiry hub, Clients & Partners, Certifications & Compliance, Careers (+detail, CV upload), News (+detail), Contact, Privacy / Cookies / Data handling / Terms, Brand.
+- **Public site:** Home, About, Services (+14 detail pages), Projects (+detail), Tenders (+detail), Inquiry hub, Clients & Partners, Certifications & Compliance, Careers (+detail, CV upload), News (+detail), Contact, Process, Sustainability, Suppliers & Subcontractors, FAQ, Downloads, Sitemap, Privacy / Cookies / Data handling / Terms, Brand.
 - **Admin:** `/admin` — 20 modules, role-based access, audit log.
 
 ## Technology
@@ -37,13 +37,7 @@ Both steps are idempotent and guarded by a PostgreSQL advisory lock.
 
 ### First sign-in
 
-| | |
-| --- | --- |
-| URL | `/admin` |
-| Email | `ADMIN_EMAIL` or `admin@ahemcorporation.com` |
-| Password | `ADMIN_PASSWORD` or `Ahem@Admin2026` |
-
-When the default password is used, the dashboard shows a persistent warning until it is changed (Admin → My account). **Set `ADMIN_EMAIL` and `ADMIN_PASSWORD` before the first production start.**
+No credentials are published in this repository. Before the first start, set `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `.env` (see `.env.example`) and sign in at `/admin` with those values. If `ADMIN_PASSWORD` is omitted, the app generates a random temporary password on first start and prints it once to the server logs — change it immediately via **Admin → My account** (the dashboard shows a persistent warning until it is changed). **Always set both variables before the first production start and never commit a real `.env` file.**
 
 ## Sample content
 
@@ -107,7 +101,7 @@ Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`. Choose rec
 
 ## SEO
 
-Unique titles/descriptions and canonical URLs per page, Open Graph/Twitter cards, generated OG image, `sitemap.xml`, `robots.txt`, Organization (`GeneralContractor`) / Service / JobPosting / NewsArticle JSON-LD. Google Analytics ID and Search Console verification are set in the admin; The cookie notice appears only when a Google Analytics ID is configured (the built-in visit counter is cookie-less), and Analytics loads only after the visitor accepts.
+Unique titles/descriptions and canonical URLs per page, Open Graph/Twitter cards, generated OG image, `sitemap.xml`, `robots.txt`, an HTML sitemap at `/sitemap`, and Organization (`GeneralContractor`) / WebSite / Service / JobPosting / NewsArticle / FAQPage JSON-LD. Google Analytics ID and Search Console verification are set in the admin; The cookie notice appears only when a Google Analytics ID is configured (the built-in visit counter is cookie-less), and Analytics loads only after the visitor accepts.
 
 ## Backups
 

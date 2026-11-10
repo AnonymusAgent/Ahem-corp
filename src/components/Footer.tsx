@@ -33,7 +33,7 @@ export function Footer({ settings: s, services }: { settings: SiteSettings; serv
         <nav aria-label="Company" className="lg:col-span-2">
           <h2 className={head}>Company</h2>
           <ul className="mt-5 space-y-3">
-            {[["About us", "/about"], ["Projects", "/projects"], ["Clients & partners", "/clients"], ["Certifications", "/certifications"], ["Careers", "/careers"], ["News & updates", "/news"], ["Contact", "/contact"]].map(([label, href]) => (
+            {[["About us", "/about"], ["Our process", "/process"], ["Sustainability & HSE", "/sustainability"], ["Projects", "/projects"], ["Clients & partners", "/clients"], ["Certifications", "/certifications"], ["Careers", "/careers"], ["News & updates", "/news"], ["Contact", "/contact"]].map(([label, href]) => (
               <li key={href}><Link href={href!} className={a}>{label}</Link></li>
             ))}
           </ul>
@@ -52,7 +52,7 @@ export function Footer({ settings: s, services }: { settings: SiteSettings; serv
         <div className="lg:col-span-3">
           <h2 className={head}>Tenders & business</h2>
           <ul className="mt-5 space-y-3">
-            {[["Tenders & procurement", "/tenders"], ["Invite us to bid", "/inquiry?type=tender-invitation"], ["Submit a project requirement", "/inquiry?type=project-requirement"], ["Request a quotation", "/inquiry?type=quotation"], ["Schedule a meeting", "/inquiry?type=meeting"]].map(([label, href]) => (
+            {[["Tenders & procurement", "/tenders"], ["Invite us to bid", "/inquiry?type=tender-invitation"], ["Submit a project requirement", "/inquiry?type=project-requirement"], ["Request a quotation", "/inquiry?type=quotation"], ["Suppliers & subcontractors", "/suppliers"], ["Schedule a meeting", "/inquiry?type=meeting"]].map(([label, href]) => (
               <li key={href}><Link href={href!} className={a}>{label}</Link></li>
             ))}
           </ul>
@@ -85,6 +85,9 @@ export function Footer({ settings: s, services }: { settings: SiteSettings; serv
             <li><Link href="/legal/cookie-policy" className="hover:text-gold">Cookies</Link></li>
             <li><Link href="/legal/data-handling" className="hover:text-gold">Data handling</Link></li>
             <li><Link href="/legal/terms" className="hover:text-gold">Terms</Link></li>
+            <li><Link href="/faq" className="hover:text-gold">FAQ</Link></li>
+            <li><Link href="/downloads" className="hover:text-gold">Downloads</Link></li>
+            <li><Link href="/sitemap" className="hover:text-gold">Sitemap</Link></li>
             <li><Link href="/brand" className="hover:text-gold">Brand</Link></li>
             <li><Link href="/admin" className="hover:text-gold">Staff sign-in</Link></li>
           </ul>

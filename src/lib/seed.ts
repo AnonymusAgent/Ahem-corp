@@ -1,3 +1,4 @@
+import { randomBytes } from "node:crypto";
 import { sql } from "drizzle-orm";
 import { db } from "@/db";
 import * as t from "@/db/schema";
@@ -5,8 +6,13 @@ import { hashPassword } from "./auth";
 import { LEAD_STATUS_LABELS, slugify, type LeadStatus } from "./site";
 import * as d from "./seed-data";
 
+/** Fallback email for the first admin when ADMIN_EMAIL is not set. The password is never hard-coded. */
 export const DEFAULT_ADMIN_EMAIL = "admin@ahemcorporation.com";
-export const DEFAULT_ADMIN_PASSWORD = "Ahem@Admin2026";
+
+/** Generates a random temporary password for first-run when ADMIN_PASSWORD is not set. */
+function generateTemporaryPassword(): string {
+  return randomBytes(18).toString("base64url");
+}
 
 /**
  * Inserts the first Super Admin and the demonstration content, once.
@@ -19,15 +25,23 @@ export async function seedIfEmpty() {
     if (existing.length) return;
 
     const email = (process.env.ADMIN_EMAIL || DEFAULT_ADMIN_EMAIL).toLowerCase();
-    const customPassword = process.env.ADMIN_PASSWORD;
+    const customPassword = process.env.ADMIN_PASSWORD?.trim() || undefined;
+    // No password is hard-coded or published. Without ADMIN_PASSWORD a random
+    // temporary password is generated, printed once to the server logs, and
+    // the dashboard forces a change on first sign-in.
+    const temporaryPassword = customPassword ? undefined : generateTemporaryPassword();
     await tx.insert(t.users).values({
       name: process.env.ADMIN_NAME || "Site Administrator",
       email,
-      passwordHash: await hashPassword(customPassword || DEFAULT_ADMIN_PASSWORD),
+      passwordHash: await hashPassword(customPassword || temporaryPassword!),
       role: "super_admin",
-      // When the documented default password is in use the dashboard shows a persistent warning until it is changed.
       mustChangePassword: !customPassword,
     });
+    if (temporaryPassword) {
+      console.log(
+        `[seed] Initial admin created for ${email}. Temporary password (change immediately after sign-in): ${temporaryPassword}`,
+      );
+    }
 
     await tx.insert(t.services).values(
       d.SERVICES.map(([title, icon, image, summary, description, capabilities], i) => ({
