@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "@fontsource-variable/inter";
-import "@fontsource-variable/plus-jakarta-sans";
+import "@fontsource-variable/archivo";
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false },
 };
 
-export const viewport: Viewport = { themeColor: "#10243A", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#142B40", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

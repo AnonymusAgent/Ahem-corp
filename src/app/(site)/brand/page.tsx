@@ -45,7 +45,7 @@ export default function BrandPage() {
           <div>
             <SectionHead eyebrow="Colour" title="Brand palette" />
             <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
-              {([["Deep Navy", BRAND.navy, "text-white"], ["Construction Gold", BRAND.gold, "text-navy"], ["Charcoal", BRAND.charcoal, "text-white"], ["White", BRAND.white, "text-navy"], ["Light Grey", BRAND.grey, "text-navy"]] as const).map(([name, hex, text]) => (
+              {([["Corporate Navy", BRAND.navy, "text-white"], ["Construction Orange", BRAND.gold, "text-charcoal"], ["Deep Charcoal", BRAND.charcoal, "text-white"], ["Warm White", "#F7F7F4", "text-charcoal"], ["Concrete Grey", "#A5A9AC", "text-charcoal"]] as const).map(([name, hex, text]) => (
                 <li key={hex} className={`flex aspect-square flex-col justify-end rounded-2xl border border-line p-4 ${text}`} style={{ background: hex }}>
                   <span className="font-display text-sm font-semibold">{name}</span>
                   <span className="font-mono text-xs opacity-80">{hex}</span>
@@ -54,10 +54,10 @@ export default function BrandPage() {
             </ul>
           </div>
           <div>
-            <SectionHead eyebrow="Typography" title="Plus Jakarta Sans & Inter" />
+            <SectionHead eyebrow="Typography" title="Archivo & Inter" />
             <div className="mt-10 space-y-6">
               <p className="font-display text-5xl font-semibold text-navy">Aa — Building Infrastructure.</p>
-              <p className="text-sm uppercase tracking-[0.2em] text-charcoal/60">Plus Jakarta Sans · headlines</p>
+              <p className="text-sm uppercase tracking-[0.2em] text-charcoal/60">Archivo · headlines</p>
               <p className="max-w-lg text-lg leading-relaxed text-charcoal/80">Inter is used for body copy, forms and data — chosen for clarity at small sizes in tender documents and dashboards alike.</p>
               <p className="text-sm uppercase tracking-[0.2em] text-charcoal/60">Inter · body text</p>
             </div>

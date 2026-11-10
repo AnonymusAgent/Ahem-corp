@@ -17,7 +17,7 @@ export function BlueprintSketch({ className = "" }: { className?: string }) {
         ))}
         <rect x="84" y="300" width="240" height="14" {...p} />
       </g>
-      <g stroke="#d6a84b">
+      <g stroke="#e89a38">
         <line x1="60" y1="314" x2="60" y2="36" {...p} />
         <line x1="24" y1="52" x2="210" y2="52" {...p} />
         <line x1="60" y1="36" x2="24" y2="52" {...p} />
@@ -68,9 +68,9 @@ export default function Hero3D() {
       const root = new THREE.Group();
       scene.add(root);
 
-      const GOLD = 0xd6a84b;
+      const GOLD = 0xe89a38;
       const STEEL = 0x9db4cc;
-      const NAVY = 0x1c3b5e;
+      const NAVY = 0x142b40;
       const bin: { dispose(): void }[] = [];
       const keep = <X extends { dispose(): void }>(x: X) => (bin.push(x), x);
 

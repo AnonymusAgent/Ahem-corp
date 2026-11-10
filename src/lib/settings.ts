@@ -163,7 +163,7 @@ export const SETTINGS_SCHEMA: { group: SettingsGroup; label: string; description
       { name: "showServices", label: "Section: Core services", type: "boolean" },
       { name: "showProjects", label: "Section: Featured projects", type: "boolean" },
       { name: "showStats", label: "Section: Achievements & statistics", type: "boolean" },
-      { name: "showDelivery", label: "Section: Interactive delivery model", type: "boolean" },
+      { name: "showDelivery", label: "Section: Our process (7-step timeline)", type: "boolean" },
       { name: "showIndustries", label: "Section: Industries served", type: "boolean" },
       { name: "showWhy", label: "Section: Why choose Ahem Corporation", type: "boolean" },
       { name: "showSectors", label: "Section: Government & private capabilities", type: "boolean" },

@@ -134,8 +134,8 @@ export function Header({ services }: { services: Item[] }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link href="/inquiry" className="btn-gold hidden !min-h-11 !px-5 sm:inline-flex">
-            Submit inquiry
+          <Link href="/inquiry?type=quotation" className="btn-gold hidden !min-h-11 !px-5 sm:inline-flex">
+            Request a Quote
           </Link>
           <button
             type="button"
@@ -193,8 +193,9 @@ export function Header({ services }: { services: Item[] }) {
             </Link>
           ))}
           <div className="mt-8 grid gap-3">
-            <Link href="/inquiry?type=tender-invitation" className="btn-gold">Invite us to bid</Link>
-            <Link href="/inquiry?type=project-requirement" className="btn-ghost">Submit a project requirement</Link>
+            <Link href="/inquiry?type=quotation" className="btn-gold">Request a Quote</Link>
+            <Link href="/inquiry?type=tender-invitation" className="btn-ghost">Invite us to bid</Link>
+            <Link href="/inquiry?type=project-requirement" className="btn-ghost">Discuss Your Project</Link>
           </div>
         </nav>
       </div>

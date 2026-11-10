@@ -30,7 +30,7 @@ export function BuildStack() {
                 tabIndex={-1}
                 onMouseEnter={() => setActive(i)}
                 onClick={() => setActive(i)}
-                className={`absolute rounded-md border transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${on ? "border-gold bg-gold/25 shadow-[0_0_60px_rgba(214,168,75,0.45)]" : "border-navy-300/50 bg-navy-600/35"}`}
+                className={`absolute rounded-md border transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${on ? "border-gold bg-gold/25 shadow-[0_0_60px_rgba(232,154,56,0.45)]" : "border-navy-300/50 bg-navy-600/35"}`}
                 style={{
                   inset,
                   transform: `translateZ(${i * 44 + (on ? 26 : 0) + (i > active ? 14 : 0)}px)`,

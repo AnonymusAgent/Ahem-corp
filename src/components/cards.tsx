@@ -36,18 +36,34 @@ export function ProjectCard({ p, tall = false }: { p: PublicProject; tall?: bool
 
 export function ServiceCard({ s, index }: { s: Service; index: number }) {
   return (
-    <Link href={`/services/${s.slug}`} className="group relative flex h-full flex-col rounded-2xl border border-line bg-white p-7 transition duration-500 hover:border-navy/30 hover:shadow-[0_30px_60px_-30px_rgba(16,36,58,0.35)]">
-      <div className="flex items-start justify-between">
-        <span className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-navy text-gold transition duration-500 group-hover:bg-gold group-hover:text-navy" style={{ transform: "translateZ(30px)" }}>
-          <ServiceIcon name={s.icon} className="h-7 w-7" />
+    <Link
+      href={`/services/${s.slug}`}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white transition duration-500 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_30px_60px_-30px_rgba(20,43,64,0.4)]"
+    >
+      <div className="relative aspect-[16/10] overflow-hidden bg-navy-900">
+        <Img
+          src={s.image}
+          alt={s.title}
+          w={800}
+          h={500}
+          className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/15 to-transparent" />
+        <span className="absolute left-4 top-4 inline-flex h-8 items-center rounded-full bg-charcoal/70 px-3 text-[0.7rem] font-semibold uppercase tracking-wider text-white backdrop-blur">
+          {String(index + 1).padStart(2, "0")}
         </span>
-        <span className="font-display text-sm font-semibold text-navy/25">{String(index + 1).padStart(2, "0")}</span>
+        <span className="absolute bottom-4 left-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gold text-charcoal shadow-lg transition duration-500 group-hover:scale-110">
+          <ServiceIcon name={s.icon} className="h-5 w-5" />
+        </span>
       </div>
-      <h3 className="mt-6 font-display text-lg font-semibold text-navy">{s.title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-charcoal/70">{s.summary}</p>
-      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-navy">
-        Explore <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
-      </span>
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="font-display text-lg font-semibold text-navy transition group-hover:text-gold-700">{s.title}</h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-charcoal/70">{s.summary}</p>
+        <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-navy">
+          Explore service
+          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+        </span>
+      </div>
     </Link>
   );
 }
@@ -56,7 +72,7 @@ export function TenderRow({ t }: { t: Tender }) {
   const status = tenderStatus(t);
   const left = daysUntil(t.deadline);
   return (
-    <Link href={`/tenders/${t.slug}`} className="group grid gap-5 rounded-2xl border border-line bg-white p-6 transition duration-300 hover:border-navy/40 hover:shadow-[0_24px_50px_-30px_rgba(16,36,58,0.4)] sm:grid-cols-[1fr_auto] sm:items-center sm:p-7">
+    <Link href={`/tenders/${t.slug}`} className="group grid gap-5 rounded-2xl border border-line bg-white p-6 transition duration-300 hover:border-navy/40 hover:shadow-[0_24px_50px_-30px_rgba(20,43,64,0.4)] sm:grid-cols-[1fr_auto] sm:items-center sm:p-7">
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-2">
           <StatusPill status={status} label={TENDER_STATUSES[status]} />
@@ -90,7 +106,7 @@ export function TenderRow({ t }: { t: Tender }) {
 
 export function NewsCard({ n }: { n: NewsItem }) {
   return (
-    <Link href={`/news/${n.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white transition duration-500 hover:shadow-[0_30px_60px_-30px_rgba(16,36,58,0.35)]">
+    <Link href={`/news/${n.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white transition duration-500 hover:shadow-[0_30px_60px_-30px_rgba(20,43,64,0.35)]">
       <div className="aspect-[16/10] overflow-hidden bg-navy">
         <Img src={n.coverImage} alt="" w={800} h={500} className="h-full w-full object-cover transition duration-[1200ms] group-hover:scale-105" />
       </div>

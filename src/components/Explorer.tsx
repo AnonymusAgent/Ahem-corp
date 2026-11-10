@@ -62,7 +62,7 @@ export function ProjectExplorer({ projects, initialCategory = "" }: { projects: 
 
   return (
     <div>
-      <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_20px_50px_-35px_rgba(16,36,58,0.4)] sm:p-6">
+      <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_20px_50px_-35px_rgba(20,43,64,0.4)] sm:p-6">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div className="self-end"><SearchBox value={f.q} onChange={set("q")} placeholder="Search projects" /></div>
           <Select label="Category" value={f.category} onChange={set("category")} options={uniq(projects.map((p) => p.category)).map((c) => [c, c])} />
@@ -132,7 +132,7 @@ export function TenderExplorer({ tenders }: { tenders: Tender[] }) {
 
   return (
     <div>
-      <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_20px_50px_-35px_rgba(16,36,58,0.4)] sm:p-6">
+      <div className="rounded-2xl border border-line bg-white p-5 shadow-[0_20px_50px_-35px_rgba(20,43,64,0.4)] sm:p-6">
         <div role="group" aria-label="Sector" className="mb-5 inline-flex rounded-full bg-mist p-1">
           {[["", "All tenders"], ["government", "Government"], ["private", "Private"]].map(([v, l]) => (
             <button key={v} type="button" aria-pressed={f.sector === v} onClick={() => set("sector")(v!)} className={`min-h-11 rounded-full px-4 text-sm font-semibold transition sm:px-5 ${f.sector === v ? "bg-navy text-white shadow" : "text-charcoal/70 hover:text-navy"}`}>
