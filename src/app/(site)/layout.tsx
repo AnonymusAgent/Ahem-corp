@@ -47,6 +47,15 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
     ...(real && s.contact.address ? { address: { "@type": "PostalAddress", streetAddress: s.contact.address } } : {}),
     sameAs: Object.values(s.social).filter((u) => /^https?:\/\//.test(u)),
   };
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    name: s.general.companyName,
+    url: SITE_URL,
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    inLanguage: "en",
+  };
 
   return (
     <>
@@ -65,6 +74,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
       <SmoothScroll />
       <Tracker />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(website).replace(/</g, "\\u003c") }} />
       <noscript>
         <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
       </noscript>

@@ -248,3 +248,23 @@ html.lenis body {
     stroke-dashoffset: 0;
   }
 }
+
+/* Print: tender and project pages are often printed for evaluation. */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+  .section {
+    padding: 1.5rem 0;
+  }
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
+}

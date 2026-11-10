@@ -10,16 +10,22 @@ type Item = { label: string; href: string };
 
 const COMPANY: Item[] = [
   { label: "About us", href: "/about" },
+  { label: "Our process", href: "/process" },
+  { label: "Sustainability & HSE", href: "/sustainability" },
+  { label: "Suppliers & subcontractors", href: "/suppliers" },
   { label: "Clients & partners", href: "/clients" },
   { label: "Certifications & compliance", href: "/certifications" },
   { label: "Careers", href: "/careers" },
   { label: "News & updates", href: "/news" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Downloads", href: "/downloads" },
 ];
 
 export function Header({ services }: { services: Item[] }) {
   const pathname = usePathname();
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openDrop, setOpenDrop] = useState<"services" | "company" | null>(null);
   const [menuTop, setMenuTop] = useState(80);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -36,11 +42,19 @@ export function Header({ services }: { services: Item[] }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    setOpen(false);
+    setOpenDrop(null);
+  }, [pathname]);
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        setOpenDrop(null);
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => {
       document.documentElement.style.overflow = "";
@@ -53,6 +67,7 @@ export function Header({ services }: { services: Item[] }) {
     `relative inline-flex h-20 items-center gap-1 px-1 text-sm font-medium transition-colors ${on ? "text-gold" : "text-white/85 hover:text-white"}`;
   const panel =
     "invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-2 rounded-2xl border border-white/10 bg-navy-900/95 p-3 opacity-0 shadow-2xl backdrop-blur-xl transition duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100";
+  const panelOpen = "visible translate-y-0 opacity-100";
   const drop = "block rounded-lg px-3 py-2.5 text-sm text-white/80 transition hover:bg-white/5 hover:text-gold";
 
   return (
@@ -67,11 +82,22 @@ export function Header({ services }: { services: Item[] }) {
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
-          <div className="group relative">
-            <Link href="/services" className={link("/services")} aria-haspopup="true">
-              Services <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" aria-hidden />
+          <div
+            className="group relative"
+            onMouseEnter={() => setOpenDrop("services")}
+            onMouseLeave={() => setOpenDrop(null)}
+          >
+            <Link
+              href="/services"
+              className={link("/services")}
+              aria-haspopup="true"
+              aria-expanded={openDrop === "services"}
+              aria-controls="services-menu"
+              onClick={() => setOpenDrop((v) => (v === "services" ? null : "services"))}
+            >
+              Services <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openDrop === "services" ? "rotate-180" : "group-hover:rotate-180"}`} aria-hidden />
             </Link>
-            <div className={`${panel} grid w-[560px] grid-cols-2 gap-x-2`}>
+            <div id="services-menu" className={`${panel} ${openDrop === "services" ? panelOpen : ""} grid w-[560px] grid-cols-2 gap-x-2`}>
               {services.map((s) => (
                 <Link key={s.href} href={s.href} className={drop}>
                   {s.label}
@@ -81,11 +107,22 @@ export function Header({ services }: { services: Item[] }) {
           </div>
           <Link href="/projects" className={link("/projects")}>Projects</Link>
           <Link href="/tenders" className={link("/tenders")}>Tenders</Link>
-          <div className="group relative">
-            <button type="button" className={link("", COMPANY.some((c) => active(c.href)))} aria-haspopup="true">
-              Company <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" aria-hidden />
+          <div
+            className="group relative"
+            onMouseEnter={() => setOpenDrop("company")}
+            onMouseLeave={() => setOpenDrop(null)}
+          >
+            <button
+              type="button"
+              className={link("", COMPANY.some((c) => active(c.href)))}
+              aria-haspopup="true"
+              aria-expanded={openDrop === "company"}
+              aria-controls="company-menu"
+              onClick={() => setOpenDrop((v) => (v === "company" ? null : "company"))}
+            >
+              Company <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openDrop === "company" ? "rotate-180" : "group-hover:rotate-180"}`} aria-hidden />
             </button>
-            <div className={`${panel} w-64`}>
+            <div id="company-menu" className={`${panel} ${openDrop === "company" ? panelOpen : ""} w-72`}>
               {COMPANY.map((c) => (
                 <Link key={c.href} href={c.href} className={drop}>
                   {c.label}
@@ -123,7 +160,30 @@ export function Header({ services }: { services: Item[] }) {
         className={`fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-navy-900 transition-opacity duration-300 lg:hidden ${open ? "visible opacity-100" : "invisible opacity-0"}`}
       >
         <nav aria-label="Mobile" className="wrap flex flex-col py-6">
-          {[{ label: "Services", href: "/services" }, { label: "Projects", href: "/projects" }, { label: "Tenders", href: "/tenders" }, ...COMPANY, { label: "Contact", href: "/contact" }].map((item) => (
+          <Link
+            href="/services"
+            className={`flex min-h-14 items-center border-b border-white/10 font-display text-xl font-medium ${active("/services") ? "text-gold" : "text-white"}`}
+          >
+            Services
+          </Link>
+          {services.length > 0 && (
+            <details className="border-b border-white/10">
+              <summary className="flex min-h-12 cursor-pointer items-center justify-between py-3 text-sm font-medium text-white/70">
+                All services
+                <ChevronDown className="h-4 w-4" aria-hidden />
+              </summary>
+              <ul className="grid gap-1 pb-4 sm:grid-cols-2">
+                {services.map((s) => (
+                  <li key={s.href}>
+                    <Link href={s.href} className="block rounded-lg px-3 py-2 text-sm text-white/75 hover:bg-white/5 hover:text-gold">
+                      {s.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+          {[{ label: "Projects", href: "/projects" }, { label: "Tenders", href: "/tenders" }, ...COMPANY, { label: "Contact", href: "/contact" }, { label: "Sitemap", href: "/sitemap" }].map((item) => (
             <Link
               key={item.href}
               href={item.href}

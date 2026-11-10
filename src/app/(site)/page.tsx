@@ -206,6 +206,9 @@ export default async function HomePage() {
             <Reveal delay={0.1} className="mt-12">
               <BuildStack />
             </Reveal>
+            <div className="mt-10 text-center">
+              <ArrowLink href="/process" light>See our full delivery process</ArrowLink>
+            </div>
           </div>
         </section>
       )}
@@ -373,7 +376,8 @@ export default async function HomePage() {
             </div>
             <p className="mt-8 flex items-start gap-2 text-sm text-charcoal/65">
               <Lock className="mt-0.5 h-4 w-4 shrink-0 text-navy" aria-hidden />
-              Only public announcements are listed here. Tender invitations sent to us through the website are confidential and are never published.
+              Only public announcements are listed here. Tender invitations sent to us through the website are confidential and are never published.{" "}
+              <Link href="/faq" className="font-semibold text-navy underline underline-offset-4">Read the FAQ</Link>
             </p>
           </div>
         </section>
